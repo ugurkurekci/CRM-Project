@@ -11,7 +11,7 @@ public interface IEmployeeRepository
 
     Task<int> Delete(int id);
 
-    Task<List<Employee>> GetAll();
+    Task<List<Employee>> GetAllAsync();
 
     Task<Employee> GetById(int id);
 

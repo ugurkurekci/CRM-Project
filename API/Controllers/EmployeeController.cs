@@ -1,5 +1,6 @@
 ﻿using Application.DTOs;
 using Application.Interface;
+using BenchmarkDotNet.Running;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -19,6 +20,7 @@ public class EmployeeController : BaseController
     {
 
         int id = await _employeeService.Create(createEmployeeDto);
+
         if (id == 0)
         {
             return BadRequest("Employee already exists");
@@ -26,6 +28,17 @@ public class EmployeeController : BaseController
 
         return Ok(id);
 
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+    {
+        var result = await _employeeService.GetAllAsync();
+        if (result is null)
+        {
+            return BadRequest();
+        }
+        return Ok(result);
     }
 
 }

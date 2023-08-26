@@ -2,44 +2,45 @@
 
 namespace Infrastructure.TechnicalServices.Caching;
 
-// Önbellekleme (caching) işlemlerini yöneten sınıfı içerir. 
 
-public class CacheManager
+public class CacheManager : ICacheManager
 {
 
-    private readonly IMemoryCache _cache;
+    private readonly IMemoryCache _memoryCache;
 
-    public CacheManager(IMemoryCache cache)
+    public CacheManager(IMemoryCache memoryCache)
     {
-        _cache = cache;
+        _memoryCache = memoryCache;
     }
 
-    public T Get<T>(string key)
+    public void Add(string key, object value)
     {
-
-        T? result = _cache.Get<T>(key);
-        if (result == null)
-        {
-            throw new KeyNotFoundException($"Key {key} not found in cache");
-        }
-
-        return result;
-
+        _memoryCache.Set(key, value);
     }
 
-    public void Set<T>(string key, T value)
+    public void Add(string key, object value, int cacheTime)
     {
-        _cache.Set(key, value);
+        _memoryCache.Set(key, value, TimeSpan.FromMinutes(cacheTime));
     }
 
     public void Clear()
     {
-        _cache.Dispose();
+        _memoryCache.Dispose();
+    }
+
+    public bool Contains(string key)
+    {
+        return _memoryCache.TryGetValue(key, out _);
+    }
+
+    public T Get<T>(string key)
+    {
+        return _memoryCache.Get<T>(key);
     }
 
     public void Remove(string key)
     {
-        _cache.Remove(key);
+        _memoryCache.Remove(key);
     }
 
 }

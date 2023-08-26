@@ -1,4 +1,6 @@
 using Application.RegisterCollection;
+using Application.Services;
+using BenchmarkDotNet.Running;
 using Infrastructure.RegisterCollection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,3 +31,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+var summary = BenchmarkRunner.Run<EmployeeService>();
+Console.WriteLine(summary);

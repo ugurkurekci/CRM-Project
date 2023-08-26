@@ -1,6 +1,4 @@
 ﻿using Core.Enums;
-using Domain.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Application.DTOs;
 

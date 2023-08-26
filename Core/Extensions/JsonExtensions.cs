@@ -13,12 +13,7 @@ public static class JsonExtensions
     public static T ToObject<T>(this string json)
     {
 
-        T? result = JsonConvert.DeserializeObject<T>(json);
-        if (result == null)
-        {
-            throw new Exception($"Could not deserialize {json} to {typeof(T).Name}");
-        }
-        return result;
+       return JsonConvert.DeserializeObject<T>(json);
 
     }
 

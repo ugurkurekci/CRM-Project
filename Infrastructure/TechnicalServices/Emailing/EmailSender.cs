@@ -4,7 +4,7 @@ using System.Net.Mail;
 
 namespace Infrastructure.TechnicalServices.Emailing;
 
-public class EmailSender
+public class EmailSender: IEmailSender
 {
 
     private readonly SmtpClient _smtpClient;
