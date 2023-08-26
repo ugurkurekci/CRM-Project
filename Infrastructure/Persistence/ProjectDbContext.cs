@@ -16,6 +16,8 @@ public class ProjectDbContext : DbContext
 
     public DbSet<Employee> Employees { get; set; }
 
+    public DbSet<User> Users { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ProjectDbContext).Assembly);

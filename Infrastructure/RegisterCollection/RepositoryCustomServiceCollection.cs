@@ -1,6 +1,9 @@
 ﻿using Domain.Interfaces;
 using Infrastructure.Persistence;
 using Infrastructure.Repositories;
+using Infrastructure.Security;
+using Infrastructure.Security.Interface;
+using Infrastructure.Security.Service;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +23,10 @@ public static class RepositoryCustomServiceCollection
             options.UseSqlServer("Server=DESKTOP-3KUC0E9;Database=WURSOFT;TrustServerCertificate=True;Trusted_Connection=True"));
 
         services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+        services.AddScoped<JwtSettings>();
+
         return services;
     }
 }
