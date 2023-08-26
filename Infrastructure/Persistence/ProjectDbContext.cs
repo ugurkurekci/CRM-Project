@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Persistence;
@@ -10,16 +11,14 @@ public class ProjectDbContext : DbContext
 {
     public ProjectDbContext(DbContextOptions<ProjectDbContext> options) : base(options)
     {
+        
     }
 
-    public DbSet<Product> Products { get; set; }
-
-    public DbSet<Customer> Customers { get; set; }
-
-    public DbSet<Order> Orders { get; set; }
+    public DbSet<Employee> Employees { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ProjectDbContext).Assembly);
     }
+
 }
